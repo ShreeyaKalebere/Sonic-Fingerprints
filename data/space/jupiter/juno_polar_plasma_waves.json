@@ -1,0 +1,10 @@
+{
+  "mission": "NASA Juno Mission",
+  "body": "jupiter",
+  "instrument": "Juno Waves Instrument (Electric Dipole Antenna)",
+  "date": "2016-08-27",
+  "description": "Fast descending whistler chirps, chorus emission pulses, and Jovian bow shock plasma wave turbulence.",
+  "audio_type": "sonified",
+  "source_url": "https://www.nasa.gov",
+  "license_note": "NASA public domain"
+}

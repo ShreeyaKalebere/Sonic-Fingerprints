@@ -1,0 +1,10 @@
+{
+  "mission": "Cassini-Huygens Mission",
+  "body": "saturn_enceladus",
+  "instrument": "Radio and Plasma Wave Science (RPWS)",
+  "date": "2004-07-01",
+  "description": "Hail-like crackling pops from micron-sized ring particle impacts combined with harmonic cryovolcanic plume plasma resonance.",
+  "audio_type": "sonified",
+  "source_url": "https://www.nasa.gov",
+  "license_note": "NASA public domain"
+}

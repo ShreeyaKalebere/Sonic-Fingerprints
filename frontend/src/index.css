@@ -1,0 +1,441 @@
+@import './styles/tokens.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(255, 138, 61, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 90% 90%, rgba(124, 92, 252, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 30%, rgba(21, 26, 36, 0.5) 0%, transparent 100%);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Monospace text utility for numeric/telemetry data */
+.font-mono,
+.metric-value,
+.mono-label,
+.telemetry-val {
+  font-family: var(--font-mono);
+}
+
+/* App Header & Brand */
+.app-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+  border-radius: var(--radius-lg);
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+}
+
+.brand-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+/* Glassmorphism / Card utility */
+.glass-panel,
+.card,
+.cosmic-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.interactive-card:hover,
+.glass-panel.hoverable:hover,
+.cosmic-card.hoverable:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+}
+
+/* Primary Action Button (Record, Analyze, Classify, Ingest, Register) */
+.btn-primary {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 0 16px var(--accent-primary-glow);
+  transform: translateY(-1px);
+}
+
+/* Space-Mode-Specific Secondary Action Button (Find Similar, Retrain Model) */
+.btn-space-secondary,
+.btn-accent-secondary {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-space-secondary:hover:not(:disabled),
+.btn-accent-secondary:hover:not(:disabled) {
+  box-shadow: 0 0 16px var(--accent-secondary-glow);
+  transform: translateY(-1px);
+}
+
+/* Secondary Ghost/Outline Button */
+.btn-secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 20px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--border-strong);
+  background: #232a3b;
+  transform: translateY(-1px);
+}
+
+/* Disabled Button state */
+button:disabled,
+.btn-primary:disabled,
+.btn-space-secondary:disabled,
+.btn-secondary:disabled {
+  background: var(--bg-elevated) !important;
+  color: var(--text-disabled) !important;
+  border: 1px solid var(--border-subtle) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+  opacity: 0.65;
+}
+
+/* Mode Switcher Tabs */
+.mode-pill {
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  user-select: none;
+}
+
+.mode-pill.active-room {
+  color: var(--accent-primary);
+  background: rgba(255, 138, 61, 0.12);
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+.mode-pill.active-space {
+  color: var(--accent-secondary);
+  background: rgba(124, 92, 252, 0.12);
+  border-bottom: 2px solid var(--accent-secondary);
+}
+
+.mode-pill:hover:not(.active-room):not(.active-space) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Audio Type Badges */
+.badge-recorded {
+  background: rgba(61, 220, 151, 0.15) !important;
+  color: var(--success) !important;
+  border: 1px solid var(--success) !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 4px 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  letter-spacing: 0.02em;
+}
+
+.badge-sonified {
+  background: rgba(124, 92, 252, 0.15) !important;
+  color: var(--accent-secondary) !important;
+  border: 1px solid var(--accent-secondary) !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 4px 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  letter-spacing: 0.02em;
+}
+
+/* Confidence Bar System */
+.confidence-track {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  height: 8px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.confidence-fill-room {
+  background: var(--accent-primary);
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.4s ease;
+}
+
+.confidence-fill-recorded {
+  background: var(--success);
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.4s ease;
+}
+
+.confidence-fill-sonified {
+  background: var(--accent-secondary);
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.4s ease;
+}
+
+/* Spectrogram Container */
+.spectrogram-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  padding: var(--space-sm);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.spectrogram-card img {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  width: 100%;
+  display: block;
+}
+
+/* Recording Countdown */
+.countdown-display {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+/* Toasts */
+.toast-box {
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.toast-success {
+  border-left: 3px solid var(--success) !important;
+}
+
+.toast-warning {
+  border-left: 3px solid var(--warning) !important;
+}
+
+.toast-error {
+  border-left: 3px solid var(--error) !important;
+}
+
+/* About Science Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 14, 20, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-md);
+}
+
+.modal-content {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+.chandra-callout {
+  background: var(--accent-secondary-glow);
+  border: 1px solid var(--accent-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3348;
+}
+
+/* Animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes liveRadarPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.radar-live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: liveRadarPulse 1.8s infinite;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .app-header {
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .countdown-display {
+    font-size: 1.8rem;
+  }
+}
+
+/* Print Certificate Optimization */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-certificate,
+  .printable-certificate * {
+    visibility: visible;
+  }
+  .printable-certificate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white !important;
+    color: #111 !important;
+    border: 2px solid #333 !important;
+    box-shadow: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+

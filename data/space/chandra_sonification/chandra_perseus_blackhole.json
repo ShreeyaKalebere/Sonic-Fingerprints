@@ -1,0 +1,10 @@
+{
+  "mission": "Chandra X-ray Observatory",
+  "body": "chandra_sonification",
+  "instrument": "Advanced CCD Imaging Spectrometer (ACIS)",
+  "date": "2022-05-04",
+  "description": "Deep cosmic ripples emitted by a supermassive black hole, scaled 57 octaves up into human audible range, with radial radar pitch sweeps.",
+  "audio_type": "sonified",
+  "source_url": "https://www.nasa.gov",
+  "license_note": "NASA public domain"
+}

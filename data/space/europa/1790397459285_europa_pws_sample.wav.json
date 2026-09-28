@@ -1,0 +1,10 @@
+{
+  "mission": "Galileo Europa Flyby (Sonified Plasma)",
+  "body": "europa",
+  "instrument": "Galileo Plasma Wave Spectrometer (PWS)",
+  "date": "2026-09-26",
+  "description": "High-frequency plasma wave oscillations in the Jovian magnetosphere surrounding Europa.",
+  "audio_type": "sonified",
+  "source_url": "https://www.nasa.gov/mission_pages/galileo/",
+  "license_note": "NASA public domain / see source_url for terms"
+}

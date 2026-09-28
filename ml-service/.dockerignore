@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+sample_audio.wav
+sample_spectrogram.png
+.pytest_cache/
+.git/
+.gitignore

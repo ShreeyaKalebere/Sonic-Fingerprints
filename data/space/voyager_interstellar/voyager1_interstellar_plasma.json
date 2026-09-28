@@ -1,0 +1,10 @@
+{
+  "mission": "Voyager Interstellar Mission",
+  "body": "voyager_interstellar",
+  "instrument": "Plasma Wave System (PWS)",
+  "date": "2012-08-25",
+  "description": "Eerie pure-tone resonant ringing at the electron plasma frequency triggered by coronal mass ejection shockwaves passing into interstellar space.",
+  "audio_type": "sonified",
+  "source_url": "https://www.nasa.gov",
+  "license_note": "NASA public domain"
+}

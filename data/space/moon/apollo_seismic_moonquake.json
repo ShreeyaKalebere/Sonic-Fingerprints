@@ -1,0 +1,10 @@
+{
+  "mission": "Apollo Passive Seismic Experiment (ALSEP)",
+  "body": "moon",
+  "instrument": "Long-Period Triaxial Seismometer",
+  "date": "1969-11-20",
+  "description": "High-Q lunar regolith reverberation ('ringing bell' effect) with low damping and multi-harmonic body waves.",
+  "audio_type": "recorded",
+  "source_url": "https://www.nasa.gov",
+  "license_note": "NASA public domain"
+}

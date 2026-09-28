@@ -1,0 +1,9 @@
+{
+  "version": "1.2.0",
+  "last_retrained_at": "2026-09-26T05:55:59.197159+00:00",
+  "trained_on_clip_count": 6,
+  "augmented_samples_count": 72,
+  "final_val_body_accuracy": 1.0,
+  "final_val_type_accuracy": 1.0,
+  "honest_evaluation_note": "Trained on 72 augmented samples derived from real clips. Final validation accuracy: Body=100.0%, Type=100.0%. Due to limited real archival samples per body, validation accuracy should be interpreted as indicative of acoustic pattern memorization rather than generalized out-of-domain robustness."
+}
