@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Lock, Mail, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+
 export default function Register({ onSwitchToLogin }) {
   const { login } = useAuth();
   const [email, setEmail] = useState('');
@@ -23,7 +25,7 @@ export default function Register({ onSwitchToLogin }) {
     setLoading(true);
 
     try {
-      const res = await fetch('/auth/register', {
+      const res = await fetch(`${API_BASE}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

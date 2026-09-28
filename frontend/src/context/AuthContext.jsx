@@ -26,7 +26,9 @@ export function AuthProvider({ children }) {
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
-      return fetch(url, {
+      const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+      const fullUrl = url.startsWith('http') ? url : `${apiBase}${url}`;
+      return fetch(fullUrl, {
         ...options,
         headers
       });

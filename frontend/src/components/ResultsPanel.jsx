@@ -398,6 +398,9 @@ export default function ResultsPanel({
               </div>
             </form>
           </div>
+        </div>
+      )}
+
       {/* 4. OFFICIAL ACOUSTIC CERTIFICATE MODAL */}
       {showCertificateModal && (
         <div className="modal-backdrop" style={{ animation: 'fadeIn 0.2s ease', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

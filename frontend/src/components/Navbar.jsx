@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Mic,
   Home,
   History as HistoryIcon,
   LogOut,
   User as UserIcon,
-  Globe
+  Globe,
+  Download,
+  Smartphone
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,6 +21,31 @@ export default function Navbar({
   onOpenRegister
 }) {
   const { user, logout, isAuthenticated } = useAuth();
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [canInstall, setCanInstall] = useState(true);
+
+  useEffect(() => {
+    const handleBeforeInstall = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setCanInstall(true);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstall);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setCanInstall(false);
+      }
+      setDeferredPrompt(null);
+    } else {
+      alert("To install Sonic Fingerprints:\n\n• On Android (Chrome): Tap the 3 dots menu -> 'Install app'\n• On iOS (Safari): Tap the Share button -> 'Add to Home Screen'\n• On Desktop (Chrome/Edge): Click the install icon in the address bar!");
+    }
+  };
 
   return (
     <header className="app-header">
@@ -99,63 +126,91 @@ export default function Navbar({
         </div>
 
         {/* User profile & Logout OR Guest Sign In */}
-        {isAuthenticated ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'var(--bg-elevated)',
-              padding: '6px 14px',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-subtle)'
-            }}>
-              <UserIcon size={14} color="var(--accent-primary)" />
-              <span className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '160px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user?.email || 'User'}
-              </span>
-            </div>
-
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          {/* PWA Install Button */}
+          {canInstall && (
             <button
-              id="btn-logout"
-              onClick={logout}
-              title="Sign Out"
+              id="btn-pwa-install"
+              onClick={handleInstallClick}
               style={{
-                background: 'rgba(255, 92, 92, 0.1)',
-                border: '1px solid rgba(255, 92, 92, 0.3)',
-                color: 'var(--error)',
-                padding: '8px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'linear-gradient(135deg, rgba(255, 138, 61, 0.15) 0%, rgba(124, 92, 252, 0.15) 100%)',
+                border: '1px solid rgba(255, 138, 61, 0.4)',
+                color: 'var(--accent-primary)',
+                padding: '6px 14px',
                 borderRadius: 'var(--radius-md)',
                 cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                fontSize: '0.8rem',
+                fontWeight: 700,
                 transition: 'all 0.2s ease'
               }}
+              title="Install Sonic Fingerprints as Native Mobile or Desktop App"
             >
-              <LogOut size={16} />
+              <Smartphone size={14} />
+              <span>Install App</span>
             </button>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <button
-              id="btn-nav-login"
-              onClick={onOpenLogin}
-              className="btn-secondary"
-              style={{ padding: '7px 16px', fontSize: '0.85rem' }}
-            >
-              Sign In
-            </button>
-            <button
-              id="btn-nav-register"
-              onClick={onOpenRegister}
-              className="btn-primary"
-              style={{ padding: '7px 16px', fontSize: '0.85rem' }}
-            >
-              Create Account
-            </button>
-          </div>
-        )}
+          )}
+
+          {isAuthenticated ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'var(--bg-elevated)',
+                padding: '6px 14px',
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-subtle)'
+              }}>
+                <UserIcon size={14} color="var(--accent-primary)" />
+                <span className="font-mono" style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '160px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {user?.email || 'User'}
+                </span>
+              </div>
+
+              <button
+                id="btn-logout"
+                onClick={logout}
+                title="Sign Out"
+                style={{
+                  background: 'rgba(255, 92, 92, 0.1)',
+                  border: '1px solid rgba(255, 92, 92, 0.3)',
+                  color: 'var(--error)',
+                  padding: '8px',
+                  borderRadius: 'var(--radius-md)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <LogOut size={16} />
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <button
+                id="btn-nav-login"
+                onClick={onOpenLogin}
+                className="btn-secondary"
+                style={{ padding: '7px 16px', fontSize: '0.85rem' }}
+              >
+                Sign In
+              </button>
+              <button
+                id="btn-nav-register"
+                onClick={onOpenRegister}
+                className="btn-primary"
+                style={{ padding: '7px 16px', fontSize: '0.85rem' }}
+              >
+                Create Account
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Sub-Nav Bar: Tabs for Mode 1 (Room Recognition) */}

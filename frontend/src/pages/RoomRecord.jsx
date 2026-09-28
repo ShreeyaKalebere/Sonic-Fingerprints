@@ -349,7 +349,6 @@ export default function RoomRecord({ onRoomRegistered, targetRoomForTest }) {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '540px', margin: '6px auto 0 auto' }}>
             Capture up to {maxDuration} seconds of ambient environmental noise to identify or register physical spaces.
           </p>
-        </div>
 
         {/* Mode Switch: Manual Snapshot vs Live Continuous Auto-Detect */}
         {!recordedBlob && !loading && (
