@@ -21,8 +21,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Pre-create panns data directory
+# Pre-create panns data directory and provide class_labels_indices.csv
 RUN mkdir -p /root/panns_data
+COPY panns_data/class_labels_indices.csv /root/panns_data/class_labels_indices.csv
 
 # Copy application source code
 COPY . .

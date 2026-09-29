@@ -20,7 +20,8 @@ sample_spectrogram.png
 *.onnx
 *.pkl
 cache/
-panns_data/
+panns_data/*.pth
+!**/panns_data/class_labels_indices.csv
 
 # Build outputs
 dist/

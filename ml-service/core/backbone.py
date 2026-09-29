@@ -5,13 +5,34 @@ import numpy as np
 import requests
 import torch
 
-try:
-    import panns_inference
-except ImportError:
-    panns_inference = None
-
 HF_PANNS_WEIGHTS_URL = "https://huggingface.co/thelou1s/panns-inference/resolve/main/Cnn14_mAP=0.431.pth"
 HF_PANNS_LABELS_URL = "https://raw.githubusercontent.com/qiuqiangkong/audioset_tagging_cnn/master/metadata/class_labels_indices.csv"
+
+def _pre_ensure_labels_csv():
+    try:
+        home = pathlib.Path.home()
+        panns_dir = home / "panns_data"
+        panns_dir.mkdir(parents=True, exist_ok=True)
+        csv_path = panns_dir / "class_labels_indices.csv"
+        if not csv_path.exists():
+            repo_csv = pathlib.Path(__file__).resolve().parent.parent / "panns_data" / "class_labels_indices.csv"
+            if repo_csv.exists():
+                import shutil
+                shutil.copyfile(str(repo_csv), str(csv_path))
+            else:
+                resp = requests.get(HF_PANNS_LABELS_URL, timeout=10)
+                if resp.status_code == 200:
+                    with open(csv_path, 'wb') as f:
+                        f.write(resp.content)
+    except Exception:
+        pass
+
+_pre_ensure_labels_csv()
+
+try:
+    import panns_inference
+except Exception:
+    panns_inference = None
 
 
 class AcousticBackbone:
